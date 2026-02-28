@@ -55,13 +55,7 @@ spec:
         - --providers.kubernetesgateway.statusaddress.service.name=traefik
         - --providers.kubernetesgateway.statusaddress.service.namespace=infra-ingress
         - --entryPoints.websecure.http.tls=true
-        - --entryPoints.websecure.http.tls.certResolver=myresolver
-        - --log.level=INFO
-        - --certificatesresolvers.myresolver.acme.caCertificates=/etc/traefik/certs/root-ca.crt
-        - --certificatesresolvers.myresolver.acme.caServer=https://ca-01.glop.pasglop/acme/acme/directory
-        - --certificatesresolvers.myresolver.acme.email=gloppasglop@glop.pasglop
-        - --certificatesresolvers.myresolver.acme.httpChallenge.entryPoint=web
-        - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
+        - --log.level=DEBUG
         env:
         - name: POD_NAME
           valueFrom:
