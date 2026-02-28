@@ -43,3 +43,18 @@ jobs:
 
       - name: Lint {{ matrix.directory }}
         run: yamllint -c ./.yamllint "${{ matrix.directory }}"
+
+  # 3. The Status Gate (The job you "Require" in Branch Protection)
+  status-check:
+    runs-on: ubuntu-latest
+    if: always() # This MUST run even if the lint jobs fail
+    needs: lint
+    steps:
+      - name: Check Lint Results
+        if: needs.lint.result != 'success'
+        run: |
+          echo "One or more Kustomize directories failed linting."
+          exit 1
+      - name: All Passed
+        if: needs.lint.result == 'success'
+        run: echo "All directories are valid!"
