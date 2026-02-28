@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: infra-ingress
 
 resources:
-  - ../../../../kutomize/components/ingress
+  - ../../../../kustomize/components/ingress
 
 patches:
   - path: service-traefik.yaml

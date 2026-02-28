@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: cert-manager
 
 resources:
-  - ../../../../kutomize/components/cert-manager
+  - ../../../../kustomize/components/cert-manager
 
 patches:
   - path: cluster-issuer-smallstep.yaml
