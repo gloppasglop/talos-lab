@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - ../../../../kutomize/components/argocd
+  - ../../../../kustomize/components/argocd
 
 patches:
   - path: ingress-argocd-server.yaml
