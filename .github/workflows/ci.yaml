@@ -11,16 +11,27 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  enumerate-folders:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: |
+          # Finds directories and converts to JSON array
+          DIRS=$(find . -type f -name "kustomization.yaml" -printf "%h\n" | sort -u | jq -R -s -c 'split("\n")[:-1]')
+          echo "matrix=$DIRS" >> $GITHUB_OUTPUT
+  lint:
+    needs: enumerate-folders
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: ${{ fromJson(needs.enumerate-folders.outputs.matrix) }}
+
+    steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
@@ -29,3 +40,6 @@ jobs:
       - name: Install yamllint
         run: |
           python -m pip install yamllint
+
+      - name: Lint {{ matrix.directory }}
+        run: yamllint -c ./.yamllint {{ matrix.directory }}
