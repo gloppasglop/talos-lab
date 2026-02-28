@@ -42,4 +42,4 @@ jobs:
           python -m pip install yamllint
 
       - name: Lint {{ matrix.directory }}
-        run: yamllint -c ./.yamllint {{ matrix.directory }}
+        run: yamllint -c ./.yamllint "${{ matrix.directory }}"
