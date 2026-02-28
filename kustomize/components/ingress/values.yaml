@@ -26,9 +26,6 @@ ports:
     expose: true
     exposedPort: 999
     nodePort: 30083
-    expose:
-      default: true
-    exposedPort: 443
     http:
       tls:
         enabled: true
@@ -46,8 +43,7 @@ certificatesResolvers:
       storage: /data/acme.json
       caServer: "https://ca-01.glop.pasglop/acme/acme/directory"
       caCertificates:
-        - /etc/traefik/certs/root-ca.crt  
+        - /etc/traefik/certs/root-ca.crt
       httpChallenge:
         # used during the challenge
         entryPoint: web
-

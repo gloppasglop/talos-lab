@@ -8,3 +8,7 @@ rules:
   indentation:
     spaces: 2
     indent-sequences: consistent
+  empty-lines:
+    max: 2            # Default is usually 2; increase this if you want more
+    max-start: 0
+    max-end: 2
