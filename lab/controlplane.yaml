@@ -21,7 +21,7 @@ machine:
         image: ghcr.io/siderolabs/kubelet:v1.35.0 # The `image` field is an optional reference to an alternative kubelet image.
         defaultRuntimeSeccompProfileEnabled: true # Enable container runtime default Seccomp profile.
         disableManifestsDirectory: true # The `disableManifestsDirectory` field configures the kubelet to get static pod manifests from the /etc/kubernetes/manifests directory.
-        
+
         # # The `ClusterDNS` field is an optional reference to an alternative kubelet clusterDNS ip list.
         # clusterDNS:
         #     - 10.96.0.10
@@ -75,7 +75,7 @@ machine:
               dhcp: true
               vip:
                 ip: 172.16.17.12
-        
+
         # # Configures KubeSpan feature.
         # kubespan:
         #     enabled: true # Enable the KubeSpan feature.
@@ -85,7 +85,7 @@ machine:
         image: ghcr.io/siderolabs/installer:v1.12.2 # Allows for supplying the image used to perform the installation.
         wipe: false # Indicates if the installation disk should be wiped at installation time.
         grubUseUKICmdline: true # Indicates if legacy GRUB bootloader should use kernel cmdline from the UKI instead of building it on the host.
-        
+
         # # Look up disk using disk attributes like model, size, serial and others.
         # diskSelector:
         #     size: 4GB # Disk size.
@@ -107,7 +107,7 @@ machine:
         hostDNS:
             enabled: true # Enable host DNS caching resolver.
             forwardKubeDNSToHost: true # Use the host DNS resolver as upstream for Kubernetes CoreDNS pods.
-        
+
         # # Configure Talos API access from Kubernetes pods.
         # kubernetesTalosAPIAccess:
         #     enabled: true # Enable Talos API access from Kubernetes pods.
@@ -120,7 +120,7 @@ machine:
     # Configures the node labels for the machine.
     nodeLabels:
         node.kubernetes.io/exclude-from-external-load-balancers: ""
-    
+
     # # Provides machine specific control plane configuration options.
 
     # # ControlPlane definition example.
@@ -245,7 +245,7 @@ cluster:
         # The service subnet CIDR.
         serviceSubnets:
             - 10.96.0.0/12
-        
+
         # # The CNI used.
         # cni:
         #     name: custom # Name of CNI to use.
@@ -293,7 +293,7 @@ cluster:
             kind: Policy
             rules:
                 - level: Metadata
-        
+
         # # Configure the API server authorization config. Node and RBAC authorizers are always added irrespective of the configuration.
         # authorizationConfig:
         #     - type: Webhook # Type is the name of the authorizer. Allowed values are `Node`, `RBAC`, and `Webhook`.
@@ -325,7 +325,7 @@ cluster:
     # Kube-proxy server-specific configuration options
     proxy:
         image: registry.k8s.io/kube-proxy:v1.35.0 # The container image used in the kube-proxy manifest.
-        
+
         # # Disable kube-proxy deployment on cluster bootstrap.
         # disabled: false
     # Scheduler server specific configuration options.
@@ -349,7 +349,7 @@ cluster:
         ca:
             crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJmVENDQVNPZ0F3SUJBZ0lRTDlWOHppVWh0RHZOSk9NVHFKVHVPakFLQmdncWhrak9QUVFEQWpBUE1RMHcKQ3dZRFZRUUtFd1JsZEdOa01CNFhEVEkyTURJeE1ERXpORE14T1ZvWERUTTJNREl3T0RFek5ETXhPVm93RHpFTgpNQXNHQTFVRUNoTUVaWFJqWkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkE3QmVwWlFFLzNOCnltOTN3UDdpY21YTUcxU1hGSUpjeXRoSjZ5VXNrM0M0anpMU0dGT3dyOXJpNVlGKzdXMG04clJMUllDU3RHaXMKYWNTOFpVeTdIdWFqWVRCZk1BNEdBMVVkRHdFQi93UUVBd0lDaERBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjRApBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVcHZuSWNOL1VTSGlTCnJxajJjYzhaTjFiRDB2a3dDZ1lJS29aSXpqMEVBd0lEU0FBd1JRSWdDVjNOUnByaFVDOXhyMnFSQW03bDkyRUoKUGJoOFh5dEt3UnVSK2VWR0thQUNJUUNMdU9nL0I2bTd5VU5iMTh4WkpmT3l3NXRHcHN5OXZEeE0yUSt1bGpXTwowQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
             key: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUJCYkJvaWVLcVp1VzNxblYwc211RDZ3SGlDajF0R2hSV2RNTU5xanh5b3BvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFRHNGNmxsQVQvYzNLYjNmQS91SnlaY3diVkpjVWdseksyRW5ySlN5VGNMaVBNdElZVTdDdgoydUxsZ1g3dGJTYnl0RXRGZ0pLMGFLeHB4THhsVExzZTVnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
-        
+
         # # The container image used to create the etcd service.
         # image: registry.k8s.io/etcd:v3.6.7
 
@@ -370,7 +370,7 @@ cluster:
     #       metadata:
     #       	name: ci
 
-    
+
     # # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
 
     # # Decryption secret example (do not use in production!).

@@ -2,5 +2,3 @@
 
 
 Experimenting with TALOS K8s
-
-
