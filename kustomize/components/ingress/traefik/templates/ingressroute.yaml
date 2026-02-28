@@ -12,10 +12,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   entryPoints:
-  - web
+    - web
   routes:
-  - match: Host(`dashboard-traefik.apps.glop.pasglop`)
-    kind: Rule
-    services:
-      - kind: TraefikService
-        name: api@internal
+    - match: Host(`dashboard-traefik.apps.glop.pasglop`)
+      kind: Rule
+      services:
+        - kind: TraefikService
+          name: api@internal
