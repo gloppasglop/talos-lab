@@ -1,0 +1,9 @@
+---
+# Source: traefik/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik
+  namespace: infra-ingress
+spec:
+  externalTrafficPolicy: Local

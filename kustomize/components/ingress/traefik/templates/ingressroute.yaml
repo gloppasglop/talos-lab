@@ -1,0 +1,21 @@
+---
+# Source: traefik/templates/ingressroute.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: infra-ingress
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik-infra-ingress
+    helm.sh/chart: traefik-39.0.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - match: Host(`dashboard-traefik.apps.glop.pasglop`)
+    kind: Rule
+    services:
+      - kind: TraefikService
+        name: api@internal

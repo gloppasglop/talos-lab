@@ -1,0 +1,17 @@
+apiVersion: v1
+items:
+  - apiVersion: argoproj.io/v1alpha1
+    kind: AppProject
+    metadata:
+      name: stream
+      namespace: argocd
+    spec:
+      destinations:
+        - namespace: "stream-*"
+          server: "*"
+      sourceRepos:
+        - "https://github.com/gloppasglop/*"
+    status: {}
+kind: List
+metadata:
+  resourceVersion: ""

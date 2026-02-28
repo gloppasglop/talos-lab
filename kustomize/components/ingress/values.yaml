@@ -1,0 +1,53 @@
+---
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: Host(`dashboard-traefik.apps.glop.pasglop`)
+    entryPoints:
+      - web
+providers:
+  kubernetesGateway:
+    enabled: true
+gateway:
+  listeners:
+    web:
+      namespacePolicy:
+        from: All
+service:
+  type: NodePort
+
+logs:
+  level: DEBUG
+
+ports:
+  web:
+    nodePort: 30080
+  websecure:
+    expose: true
+    exposedPort: 999
+    nodePort: 30083
+    expose:
+      default: true
+    exposedPort: 443
+    http:
+      tls:
+        enabled: true
+        options: ""
+        certResolver: myresolver
+        volumes: []
+volumes:
+  - name: ca-certs
+    mountPath: "/etc/traefik/certs"
+    type: configMap
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: gloppasglop@glop.pasglop
+      storage: /data/acme.json
+      caServer: "https://ca-01.glop.pasglop/acme/acme/directory"
+      caCertificates:
+        - /etc/traefik/certs/root-ca.crt  
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
+

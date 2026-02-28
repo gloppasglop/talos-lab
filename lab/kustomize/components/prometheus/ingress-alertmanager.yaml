@@ -1,0 +1,13 @@
+---
+# whoami-ingressroute.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager
+spec:
+  routes:
+    - match: Host(`alertmanager.apps.glop.pasglop`)
+      kind: Rule
+      services:
+        - name: alertmanager-main
+          port: web

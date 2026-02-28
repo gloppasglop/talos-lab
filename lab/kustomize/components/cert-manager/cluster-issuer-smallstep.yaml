@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: default-issuer
+spec:
+  acme:
+    # You must replace this email address with your own.
+    email: gloppasglop@glop.pasglop
+    # If the ACME server supports profiles, you can specify the profile name here.
+    # See #acme-certificate-profiles below.
+    server: https://ca-01.glop.pasglop/acme/acme/directory
+    privateKeySecretRef:
+      name: ca-01-account-key
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJyRENDQVZLZ0F3SUJBZ0lSQVA1d1E1ejhsdWt6K0N3V015dmUyWkF3Q2dZSUtvWkl6ajBFQXdJd05ERVUKTUJJR0ExVUVDaE1MUjJ4dmNIQmhjMmRzYjNBeEhEQWFCZ05WQkFNVEUwZHNiM0J3WVhObmJHOXdJRkp2YjNRZwpRMEV3SGhjTk1qWXdNakV5TVRZek16QTFXaGNOTXpZd01qRXdNVFl6TXpBMVdqQTBNUlF3RWdZRFZRUUtFd3RICmJHOXdjR0Z6WjJ4dmNERWNNQm9HQTFVRUF4TVRSMnh2Y0hCaGMyZHNiM0FnVW05dmRDQkRRVEJaTUJNR0J5cUcKU000OUFnRUdDQ3FHU000OUF3RUhBMElBQk1ZK25JcXlLT284ZFcxR1lOcWtWQ1B6c05vZWR0NGNHQVhyRmFYcwo4NU8zb1lBMnNDczRjK0VHUWtOTGljcE1Fei9XbW8wRlh2blVPY2JKUU5LcW9MbWpSVEJETUE0R0ExVWREd0VCCi93UUVBd0lCQmpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQk1CMEdBMVVkRGdRV0JCVFBGSjkyUW5FVTYyVjYKSjFSaVlieEU5MERFVHpBS0JnZ3Foa2pPUFFRREFnTklBREJGQWlFQW1JZUlzTUEyM1dEVVcvY2Jqb2hOTlBVeApIUXArekdOS3FIUGY5bGZnY2tBQ0lHL05tUlFUSC81K2t3ZmI5V3F0aUppWnpQNnVLZ2Y1dmhWZnR2YjRrbXdSCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: traefik

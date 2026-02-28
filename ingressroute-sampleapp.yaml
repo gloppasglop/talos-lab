@@ -1,0 +1,72 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: whoami-09
+  namespace: sampleapp
+spec:
+  dnsNames:
+    - whoami-09.apps.glop.pasglop
+  secretName: whoami-09-cert-tls
+  issuerRef:
+    name: default-issuer
+    kind: ClusterIssuer
+---
+# whoami-ingressroute.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami
+  namespace: sampleapp
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`whoami-09.apps.glop.pasglop`)
+      kind: Rule
+      services:
+        - name: whoami
+          port: 80
+  tls:
+    secretName: whoami-09-cert-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: whoami-10
+  namespace: sampleapp
+spec:
+  dnsNames:
+    - whoami-10.apps.glop.pasglop
+  secretName: whoami-10-cert-tls
+  issuerRef:
+    name: default-issuer
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami-10.apps.glop.pasglop
+  namespace: sampleapp
+  annotations:
+    # Optional: Automatically redirect HTTP to HTTPS
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - whoami-10.apps.glop.pasglop
+      # The Secret where your cert is stored
+      secretName: whoami-10-cert-tls
+  rules:
+    - host: whoami-10.apps.glop.pasglop
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  number: 80

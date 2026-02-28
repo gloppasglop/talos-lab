@@ -1,0 +1,33 @@
+---
+# - op: add
+#   path: /spec/template/spec/containers/0/args/-
+#   value: "--certificatesresolvers.myresolver.acme.caServer=https://ca-01.glop.pasglop/acme/acme/directory"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/args/-
+#   value: "--certificatesresolvers.myresolver.acme.email=gloppasglop@glop.pasglop"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/args/-
+#   value: "--certificatesresolvers.myresolver.acme.httpChallenge.entryPoint=web"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/args/-
+#   value: "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/args/-
+#   value: "--entryPoints.websecure.http.tls.certResolver=myresolver"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/env/-
+#   value:
+#     name: LEGO_CA_CERTIFICATES
+#     value: "/etc/traefik/certs/root-ca.crt"
+
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: ca-certs
+    mountPath: "/etc/traefik/certs"
+    readOnly: true

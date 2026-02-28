@@ -1,0 +1,13 @@
+---
+# whoami-ingressroute.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus
+spec:
+  routes:
+    - match: Host(`prometheus.apps.glop.pasglop`)
+      kind: Rule
+      services:
+        - name: prometheus-main
+          port: web

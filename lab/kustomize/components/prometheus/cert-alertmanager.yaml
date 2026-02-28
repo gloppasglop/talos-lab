@@ -1,0 +1,7 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: alertmanager
+spec:
+  dnsNames:
+    - alertmanager.apps.glop.pasglop

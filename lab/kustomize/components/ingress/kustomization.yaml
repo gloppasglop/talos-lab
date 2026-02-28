@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: infra-ingress
+
+resources:
+  - ../../../../kutomize/components/ingress
+
+patches:
+  - path: service-traefik.yaml
+  - path: deployment-traefik.yaml
+    # - path: deployment-traefik-acme.yaml
+    target:
+      kind: Deployment
+      name: traefik
+
+configMapGenerator:
+  - name: ca-certs
+    files:
+      - root-ca.crt # The actual file on your local machine
+generatorOptions:
+  disableNameSuffixHash: true
+
+images:
+  - name: traefik
+    newName: docker.io/traefik
+    newTag: "v3.6.8"

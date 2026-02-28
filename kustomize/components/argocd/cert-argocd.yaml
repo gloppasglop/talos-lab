@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  dnsNames:
+    - argocd.example.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: default-issuer
+  secretName: argocd-cert-tls

@@ -1,0 +1,19 @@
+---
+# Source: traefik/templates/rbac/clusterrolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: traefik-infra-ingress
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik-infra-ingress
+    helm.sh/chart: traefik-39.0.0
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: traefik-infra-ingress
+subjects:
+  - kind: ServiceAccount
+    name: traefik
+    namespace: infra-ingress

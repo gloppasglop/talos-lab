@@ -1,0 +1,50 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  #
+  # Custom Resource Definitions
+  #
+  - namespace.yaml
+  - traefik/crds/gateway-standard-install.yaml
+  - traefik/crds/hub.traefik.io_accesscontrolpolicies.yaml
+  - traefik/crds/hub.traefik.io_aiservices.yaml
+  - traefik/crds/hub.traefik.io_apiauths.yaml
+  - traefik/crds/hub.traefik.io_apibundles.yaml
+  - traefik/crds/hub.traefik.io_apicatalogitems.yaml
+  - traefik/crds/hub.traefik.io_apiplans.yaml
+  - traefik/crds/hub.traefik.io_apiportalauths.yaml
+  - traefik/crds/hub.traefik.io_apiportals.yaml
+  - traefik/crds/hub.traefik.io_apiratelimits.yaml
+  - traefik/crds/hub.traefik.io_apis.yaml
+  - traefik/crds/hub.traefik.io_apiversions.yaml
+  - traefik/crds/hub.traefik.io_managedapplications.yaml
+  - traefik/crds/hub.traefik.io_managedsubscriptions.yaml
+  - traefik/crds/traefik.io_ingressroutes.yaml
+  - traefik/crds/traefik.io_ingressroutetcps.yaml
+  - traefik/crds/traefik.io_ingressrouteudps.yaml
+  - traefik/crds/traefik.io_middlewares.yaml
+  - traefik/crds/traefik.io_middlewaretcps.yaml
+  - traefik/crds/traefik.io_serverstransports.yaml
+  - traefik/crds/traefik.io_serverstransporttcps.yaml
+  - traefik/crds/traefik.io_tlsoptions.yaml
+  - traefik/crds/traefik.io_tlsstores.yaml
+  - traefik/crds/traefik.io_traefikservices.yaml
+
+  #
+  # Traefik objects
+  #
+  #
+  - traefik/templates/deployment.yaml
+  - traefik/templates/ingressclass.yaml
+  - traefik/templates/service.yaml
+
+  - traefik/templates/gatewayclass.yaml
+  - traefik/templates/gateway.yaml
+  - traefik/templates/ingressroute.yaml
+
+  - traefik/templates/rbac/serviceaccount.yaml
+  - traefik/templates/rbac/clusterrole.yaml
+  - traefik/templates/rbac/clusterrolebinding.yaml
+
+  - tlsprofile-default.yaml

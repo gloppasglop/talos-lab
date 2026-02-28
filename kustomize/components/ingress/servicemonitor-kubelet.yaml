@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kubelet-cadvisor
+  namespace: infra-prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: prometheus-operator
+      # This usually targets the 'kubelet' service in the kube-system namespace
+  namespaceSelector:
+    matchNames:
+      - kube-system
+  endpoints:
+    - port: https-metrics
+      scheme: https
+      path: /metrics/cadvisor
+      honorLabels: true
+      tlsConfig:
+        # Talos uses self-signed kubelet certs by default.
+        # 'insecureSkipVerify' is the quickest way to get data flowing.
+        insecureSkipVerify: true
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
