@@ -10,7 +10,14 @@ spec:
       server: "*"
   sourceRepos:
     - "https://github.com/gloppasglop/*"
+    - "https://git.glop.pasglop/gloppasglop/*"
 
   clusterResourceWhitelist:
     - group: apiextensions.k8s.io
       kind: CustomResourceDefinition
+    - group: ""
+      kind: namespace
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding

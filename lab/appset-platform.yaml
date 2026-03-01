@@ -14,7 +14,7 @@ spec:
                 - cluster: lab
                   url: https://kubernetes.default.svc
           - git:
-              repoURL: https://github.com/gloppasglop/talos-lab.git
+              repoURL: https://git.glop.pasglop/gloppasglop/talos-lab.git
               revision: HEAD
               directories:
                 - path: "{{ .cluster }}/kustomize/components/*"
@@ -24,7 +24,7 @@ spec:
     spec:
       project: "platform"
       source:
-        repoURL: https://github.com/gloppasglop/talos-lab.git
+        repoURL: https://git.glop.pasglop/gloppasglop/talos-lab.git
         targetRevision: HEAD
         path: "{{.path.path}}"
       destination:
