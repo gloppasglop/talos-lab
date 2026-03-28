@@ -1,0 +1,17 @@
+machine:
+  files:
+    - content: |
+        -----BEGIN CERTIFICATE-----
+        MIIBrDCCAVKgAwIBAgIRAP5wQ5z8lukz+CwWMyve2ZAwCgYIKoZIzj0EAwIwNDEU
+        MBIGA1UEChMLR2xvcHBhc2dsb3AxHDAaBgNVBAMTE0dsb3BwYXNnbG9wIFJvb3Qg
+        Q0EwHhcNMjYwMjEyMTYzMzA1WhcNMzYwMjEwMTYzMzA1WjA0MRQwEgYDVQQKEwtH
+        bG9wcGFzZ2xvcDEcMBoGA1UEAxMTR2xvcHBhc2dsb3AgUm9vdCBDQTBZMBMGByqG
+        SM49AgEGCCqGSM49AwEHA0IABMY+nIqyKOo8dW1GYNqkVCPzsNoedt4cGAXrFaXs
+        85O3oYA2sCs4c+EGQkNLicpMEz/Wmo0FXvnUOcbJQNKqoLmjRTBDMA4GA1UdDwEB
+        /wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMB0GA1UdDgQWBBTPFJ92QnEU62V6
+        J1RiYbxE90DETzAKBggqhkjOPQQDAgNIADBFAiEAmIeIsMA23WDUW/cbjohNNPUx
+        HQp+zGNKqHPf9lfgckACIG/NmRQTH/5+kwfb9WqtiJiZzP6uKgf5vhVftvb4kmwR
+        -----END CERTIFICATE-----
+      permissions: 0644
+      path: /etc/ssl/certs/ca-certificates
+      op: append

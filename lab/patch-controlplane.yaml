@@ -5,3 +5,49 @@ machine:
         dhcp: true
         vip:
           ip: 172.16.17.12
+  files:
+    - content: |
+        -----BEGIN CERTIFICATE-----
+        MIIBrDCCAVKgAwIBAgIRAP5wQ5z8lukz+CwWMyve2ZAwCgYIKoZIzj0EAwIwNDEU
+        MBIGA1UEChMLR2xvcHBhc2dsb3AxHDAaBgNVBAMTE0dsb3BwYXNnbG9wIFJvb3Qg
+        Q0EwHhcNMjYwMjEyMTYzMzA1WhcNMzYwMjEwMTYzMzA1WjA0MRQwEgYDVQQKEwtH
+        bG9wcGFzZ2xvcDEcMBoGA1UEAxMTR2xvcHBhc2dsb3AgUm9vdCBDQTBZMBMGByqG
+        SM49AgEGCCqGSM49AwEHA0IABMY+nIqyKOo8dW1GYNqkVCPzsNoedt4cGAXrFaXs
+        85O3oYA2sCs4c+EGQkNLicpMEz/Wmo0FXvnUOcbJQNKqoLmjRTBDMA4GA1UdDwEB
+        /wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMB0GA1UdDgQWBBTPFJ92QnEU62V6
+        J1RiYbxE90DETzAKBggqhkjOPQQDAgNIADBFAiEAmIeIsMA23WDUW/cbjohNNPUx
+        HQp+zGNKqHPf9lfgckACIG/NmRQTH/5+kwfb9WqtiJiZzP6uKgf5vhVftvb4kmwR
+        -----END CERTIFICATE-----
+      permissions: 0o644
+      path: /var/etc/ssl/certs/glop-pasglop-ca.pem
+      op: create
+cluster:
+  apiServer:
+    extraVolumes:
+      - hostPath: /var/etc/ssl/certs/glop-pasglop-ca.pem
+        mountPath: /var/etc/ssl/certs/glop-pasglop-ca.pem
+        readonly: true
+    extraArgs:
+      oidc-ca-file: /var/etc/ssl/certs/glop-pasglop-ca.pem
+      oidc-client-id: talos-web
+      oidc-groups-claim: groups
+      oidc-groups-prefix: "oidc:"
+      oidc-issuer-url: "https://idp.glop.pasglop/realms/GLOP"
+      oidc-username-claim: email
+      oidc-username-prefix: "oidc:"
+---
+apiVersion: v1alpha1
+kind: TrustedRootsConfig
+name: custom-ca
+certificates: |-
+  -----BEGIN CERTIFICATE-----
+  MIIBrDCCAVKgAwIBAgIRAP5wQ5z8lukz+CwWMyve2ZAwCgYIKoZIzj0EAwIwNDEU
+  MBIGA1UEChMLR2xvcHBhc2dsb3AxHDAaBgNVBAMTE0dsb3BwYXNnbG9wIFJvb3Qg
+  Q0EwHhcNMjYwMjEyMTYzMzA1WhcNMzYwMjEwMTYzMzA1WjA0MRQwEgYDVQQKEwtH
+  bG9wcGFzZ2xvcDEcMBoGA1UEAxMTR2xvcHBhc2dsb3AgUm9vdCBDQTBZMBMGByqG
+  SM49AgEGCCqGSM49AwEHA0IABMY+nIqyKOo8dW1GYNqkVCPzsNoedt4cGAXrFaXs
+  85O3oYA2sCs4c+EGQkNLicpMEz/Wmo0FXvnUOcbJQNKqoLmjRTBDMA4GA1UdDwEB
+  /wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMB0GA1UdDgQWBBTPFJ92QnEU62V6
+  J1RiYbxE90DETzAKBggqhkjOPQQDAgNIADBFAiEAmIeIsMA23WDUW/cbjohNNPUx
+  HQp+zGNKqHPf9lfgckACIG/NmRQTH/5+kwfb9WqtiJiZzP6uKgf5vhVftvb4kmwR
+  -----END CERTIFICATE-----

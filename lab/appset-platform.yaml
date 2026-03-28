@@ -21,6 +21,9 @@ spec:
   template:
     metadata:
       name: "{{ .cluster }}-{{ index .path.segments 3 }}"
+      labels:
+        team: platform
+        component: "{{ index .path.segments 3 }}"
     spec:
       project: "platform"
       source:
@@ -29,7 +32,8 @@ spec:
         path: "{{.path.path}}"
       destination:
         server: "{{ .url}}"
-        namespace: "{{ index .path.segments 3 }}"
+        # namespace: "{{ index .path.segments 3 }}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=false
+          - ServerSideApply=true
